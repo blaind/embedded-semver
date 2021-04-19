@@ -1,9 +1,11 @@
-# embedded-semver &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![Docs Version]][docs]
+# embedded-semver &emsp; [![Build Status]][actions] [![Latest Version]][crates.io] [![Docs Version]][docs] [![Lines of Code]][github]
 
 [Build Status]: https://img.shields.io/github/workflow/status/blaind/embedded-semver/test
 [actions]: https://github.com/blaind/embedded-semver/actions?query=branch%3Amain
 [Latest Version]: https://img.shields.io/crates/v/embedded-semver.svg
 [crates.io]: https://crates.io/crates/embedded-semver
+[Lines of Code]: https://tokei.rs/b1/github/blaind/embedded-semver?category=code
+[github]: https://github.com/blaind/embedded-semver
 
 [Docs Version]: https://docs.rs/embedded-semver/badge.svg
 [docs]: https://docs.rs/embedded-semver
