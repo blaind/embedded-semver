@@ -1,6 +1,6 @@
 [package]
 name = "embedded-semver"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Mika Vatanen <blaind@blaind.net>"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
@@ -11,10 +11,11 @@ Compact representation of semantic versions as an i32, u32 i64 or u64
 keywords = ["semver", "version"]
 categories = ["parser-implementations", "embedded", "no-std"]
 edition = "2018"
+rust-version = "1.51"
 
 [features]
 default = ["std"]
 std = []
 
 [dependencies]
-bitvec = "0.22.1"
+bitvec = "0.22.3"

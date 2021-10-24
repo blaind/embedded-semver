@@ -137,6 +137,10 @@ test bench_to_i32   ... bench:          75 ns/iter (+/- 1)
 test bench_to_i64   ... bench:          84 ns/iter (+/- 2)
 ```
 
+## Rust Version Support
+
+The minimum supported Rust version is 1.51
+
 ## Future plans
 
 None currently
