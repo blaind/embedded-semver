@@ -18,4 +18,4 @@ default = ["std"]
 std = []
 
 [dependencies]
-bitvec = "0.22.3"
+bitvec = "1.0.1"
