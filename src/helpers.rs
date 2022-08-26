@@ -3,7 +3,7 @@ use bitvec::prelude::*;
 use crate::{sizes, Error};
 
 pub fn num_as_bv<const SIZE: usize, const ITER_SIZE: usize>(
-    bv: &mut BitArray<Msb0, [u8; SIZE]>,
+    bv: &mut BitArray<[u8; SIZE], Msb0>,
     iter: &mut sizes::SizeIterator<ITER_SIZE>,
     n: u64,
 ) -> Result<(), Error> {

@@ -66,10 +66,10 @@ impl Semver {
 
     /// Convert to an i32. Errs if any of the fields overflow
     pub fn to_i32(&self) -> Result<i32, Error> {
-        let mut bv: BitArray<Msb0, [u8; 4]> = BitArray::zeroed();
+        let mut bv: BitArray<[u8; 4], Msb0> = BitArray::ZERO;
         let sizes = sizes::size_iterator(&sizes::I32_SIZES);
         self.append_with_size_iterator(&mut bv, sizes)?;
-        Ok(i32::from_le_bytes(*bv.as_buffer()))
+        Ok(i32::from_le_bytes(bv.data))
     }
 
     /// Convert to an u32. Errs if any of the fields overflow
@@ -80,10 +80,10 @@ impl Semver {
 
     /// Convert to an u64. Errs if any of the fields overflow
     pub fn to_i64(&self) -> Result<i64, Error> {
-        let mut bv: BitArray<Msb0, [u8; 8]> = BitArray::zeroed();
+        let mut bv: BitArray<[u8; 8], Msb0> = BitArray::ZERO;
         let sizes = sizes::size_iterator(&sizes::I64_SIZES);
         self.append_with_size_iterator(&mut bv, sizes)?;
-        Ok(i64::from_le_bytes(*bv.as_buffer()))
+        Ok(i64::from_le_bytes(bv.data))
     }
 
     /// Convert to an u64. Errs if any of the fields overflow
@@ -93,7 +93,7 @@ impl Semver {
     }
 
     fn from_size_iterator<const SIZE: usize>(
-        bv: &BitSlice<Msb0, u8>,
+        bv: &BitSlice<u8, Msb0>,
         mut sizes: sizes::SizeIterator<SIZE>,
     ) -> Result<Self, Error> {
         Ok(Self {
@@ -106,7 +106,7 @@ impl Semver {
 
     fn append_with_size_iterator<const SIZE: usize, const ITER_SIZE: usize>(
         &self,
-        bv: &mut BitArray<Msb0, [u8; SIZE]>,
+        bv: &mut BitArray<[u8; SIZE], Msb0>,
         mut sizes: sizes::SizeIterator<ITER_SIZE>,
     ) -> Result<(), Error> {
         num_as_bv(bv, &mut sizes, Magic::default() as u64)?; // for now, can be extended in future
@@ -159,10 +159,10 @@ mod tests {
 
     #[test]
     fn test_unsupported_api_version() {
-        let mut bv: BitArray<Msb0, [u8; 4]> = BitArray::zeroed();
+        let mut bv: BitArray<[u8; 4], Msb0> = BitArray::ZERO;
         let mut iter = sizes::size_iterator(&sizes::I32_SIZES);
         num_as_bv(&mut bv, &mut iter, Magic::V2 as u64).unwrap();
-        let val = i32::from_le_bytes(*bv.as_buffer());
+        let val = i32::from_le_bytes(bv.data);
 
         assert_eq!(
             Semver::from_i32(val).unwrap_err(),
@@ -172,10 +172,10 @@ mod tests {
 
     #[test]
     fn test_unknown_api_version() {
-        let mut bv: BitArray<Msb0, [u8; 8]> = BitArray::zeroed();
+        let mut bv: BitArray<[u8; 8], Msb0> = BitArray::ZERO;
         let mut iter = sizes::size_iterator(&sizes::I64_SIZES);
         num_as_bv(&mut bv, &mut iter, 13).unwrap();
-        let val = i64::from_le_bytes(*bv.as_buffer());
+        let val = i64::from_le_bytes(bv.data);
 
         assert_eq!(Semver::from_i64(val).unwrap_err(), Error::UnknownMagic(13));
     }

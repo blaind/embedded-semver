@@ -1,6 +1,6 @@
 [package]
 name = "embedded-semver"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Mika Vatanen <blaind@blaind.net>"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
@@ -18,4 +18,4 @@ default = ["std"]
 std = []
 
 [dependencies]
-bitvec = "0.22.3"
+bitvec = "1.0"
